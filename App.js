@@ -1,21 +1,63 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+// import { StatusBar } from 'expo-status-bar';
+import React, { Component, useState } from "react";
+import Constants from "expo-constants";
+//  import {createAppContainer} from "react-navigation";
+import { createDrawerNavigator } from "react-navigation-drawer";
+import { Dimensions } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import Product from "./screens/Product";
+import {
+  ProductScreen,
+  SearchScreen,
+  MessageScreen,
+  UpdateScreen,
+  LogoutScreen,
+  ReportScreen,
+  UserScreen,
+} from "./screens";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  StatusBar,
+} from "react-native";
+import {
+  createSwitchNavigator,
+  createAppContainer,
+  StackNavigator,
+} from "react-navigation";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "react-navigation-stack";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import SideBar from "./components/SideBar";
+import searchUsers from "./screens/searchUsers";
+// import ChatScreen from "./screens/ChatScreen";
+import Login from "./components/Login";
+import Profile from "./components/Profile";
+import Home from "./Home";
+import chat2 from "./chat/chat2";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const AppNavigator = createStackNavigator(
+  {
+    Login: {
+      screen: Login,
+    },
+    Home: {
+      screen: Home,
+    },
+    ChatScreen: {
+      screen: chat2,
+    },
   },
-});
+  {
+    headerMode: "none",
+  }
+);
+const Appcontainer = createAppContainer(AppNavigator);
+export default class App extends React.Component {
+  render() {
+    return <Appcontainer />;
+  }
+}
